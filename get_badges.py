@@ -7,7 +7,7 @@ app = Flask(__name__)  # Flask constructor
 
 # A decorator used to tell the application
 # which URL is associated function
-@app.route('/badges/<placeid>', methods=['GET'])
+@app.route('/<placeid>', methods=['GET'])
 # def hello():
 #     return 'HELLO'
 
