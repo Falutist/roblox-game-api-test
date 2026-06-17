@@ -7,7 +7,7 @@ app = Flask(__name__)  # Flask constructor
 
 # A decorator used to tell the application
 # which URL is associated function
-@app.route('/<placeid>', methods=['GET'])
+@app.route('/badges/<placeid>', methods=['GET'])
 # def hello():
 #     return 'HELLO'
 
@@ -24,7 +24,7 @@ def get_universe_id(placeid):
     universe_id = data['universeId']
     # get_badges(universe_id)
 
-    return get_badges(universe_id)
+    return get_game_data(universe_id)
 
 def get_badges(universe_id):
     badges = f"https://badges.roblox.com/v1/universes/{universe_id}/badges"
@@ -38,6 +38,13 @@ def get_badges(universe_id):
         print(name, icon_id)
     return badge_data
     # print(badge_data['data']['name'])
+
+def get_game_data(universe_id):
+    game = f"https://games.roblox.com/v1/games?universeIds={universe_id}"
+    # game = f"https://games.roblox.com/v1/games/{universe_id}"
+    response = requests.get(game)
+    game_data = response.json()
+    return game_data
 
 if __name__ == '__main__':
     app.run()
